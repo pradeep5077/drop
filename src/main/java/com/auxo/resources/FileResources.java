@@ -3,8 +3,6 @@ package com.auxo.resources;
 
 import com.sun.jersey.core.header.FormDataContentDisposition;
 import com.sun.jersey.multipart.FormDataParam;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -23,12 +21,13 @@ public class FileResources {
             @FormDataParam("file") InputStream uploadedInputStream,
             @FormDataParam("file") FormDataContentDisposition fileDetail) throws IOException {
 
-        String location = "E:\\Txt\\" + fileDetail.getFileName();
+        String location = "D:\\" + fileDetail.getFileName();
 
-        System.out.println("location "+location);
+
 Producer producer=new Producer();
 
 
+        producer.writeToFile(uploadedInputStream, location);
         return Response.ok(producer.parseThis(location)).build();
     }
 
